@@ -1,0 +1,20 @@
+
+Title:
+    Cupcake character walk and jump
+
+Author:
+    PWL
+
+URL:
+    https://opengameart.org/content/cupcake-character-walk-and-jump
+
+License(s):
+    * CC0 ( http://creativecommons.org/publicdomain/zero/1.0/legalcode )
+
+Copyright/Attribution Notice:
+    Use for anything :)
+
+File(s):
+    * muffin_character.zip
+
+----------------------------------------
