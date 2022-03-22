@@ -8,21 +8,25 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.rc.fortress.game.Muffin;
+import com.rc.fortress.game.Platform;
 import com.rc.fortress.utils.Assets;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Muffin muffin;
+	Platform platform;
 	
 	@Override
 	public void create () {
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		Gdx.app.setLogLevel(Application.LOG_ERROR);
+
 		Assets.instance.init(new AssetManager());
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 
-		muffin = new Muffin(0, 0, 150, 150);
+		muffin = new Muffin(100, 30, 75, 75);
+		platform = new Platform(10, 10, 200, 50);
 	}
 
 	@Override
@@ -31,6 +35,7 @@ public class Game extends ApplicationAdapter {
 		muffin.update(Gdx.graphics.getDeltaTime());
 
 		batch.begin();
+		platform.render(batch);
 		muffin.render(batch);
 		batch.end();
 	}

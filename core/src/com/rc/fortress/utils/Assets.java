@@ -13,9 +13,12 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String TAG = Assets.class.getName();
 
     public static final Assets instance = new Assets();
-    private AssetManager assetManager;
-    public AssetMuffin assetMuffin;
 
+    private AssetManager assetManager;
+
+    // Media de los objetos
+    public AssetMuffin assetMuffin;
+    public AssetPlatform assetPlatform;
 
     private Assets(){}
 
@@ -31,6 +34,7 @@ public class Assets implements Disposable, AssetErrorListener {
             t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         assetMuffin = new AssetMuffin(atlas);
+        assetPlatform = new AssetPlatform(atlas);
     }
 
     public static class AssetMuffin {
@@ -45,6 +49,14 @@ public class Assets implements Disposable, AssetErrorListener {
 
             walking = new Animation(0.12f, tmp);
             jumping = new TextureRegion(atlas.findRegion("muffin-jump"));
+        }
+    }
+
+    public static class AssetPlatform {
+        public final TextureRegion platform;
+
+        public AssetPlatform(TextureAtlas atlas){
+            platform = new TextureRegion(atlas.findRegion("platform"));
         }
     }
 

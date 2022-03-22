@@ -1,55 +1,62 @@
 
-muffin.png
+assets.png
 size: 2048, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 muffin-1
   rotate: false
-  xy: 1030, 1030
+  xy: 1030, 1177
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 muffin-2
   rotate: false
-  xy: 516, 1030
+  xy: 516, 1177
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 muffin-3
   rotate: false
-  xy: 2, 1030
+  xy: 2, 1177
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 muffin-4
   rotate: false
-  xy: 516, 516
+  xy: 516, 663
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 muffin-5
   rotate: false
-  xy: 2, 516
+  xy: 2, 663
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 muffin-6
   rotate: false
-  xy: 516, 2
+  xy: 516, 149
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 muffin-jump
   rotate: false
-  xy: 2, 2
+  xy: 2, 149
   size: 512, 512
   orig: 512, 512
+  offset: 0, 0
+  index: -1
+platform
+  rotate: false
+  xy: 2, 2
+  size: 469, 145
+  orig: 469, 145
   offset: 0, 0
   index: -1

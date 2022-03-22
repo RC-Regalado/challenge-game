@@ -1,5 +1,5 @@
 package com.rc.fortress.utils;
 
 public class Constants {
-    public static final String ATLAS = "muffin.atlas";
+    public static final String ATLAS = "assets.atlas";
 }
