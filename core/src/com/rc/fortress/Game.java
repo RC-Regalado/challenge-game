@@ -25,8 +25,8 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 
-		muffin = new Muffin(100, 30, 75, 75);
-		platform = new Platform(10, 10, 200, 50);
+		muffin = new Muffin(100, 30);
+		platform = new Platform(10, 10, 200);
 	}
 
 	@Override
