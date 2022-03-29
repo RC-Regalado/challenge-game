@@ -1,7 +1,7 @@
 package com.rc.fortress;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,7 +11,7 @@ import com.rc.fortress.game.Muffin;
 import com.rc.fortress.game.Platform;
 import com.rc.fortress.utils.Assets;
 
-public class Game extends ApplicationAdapter {
+public class Fortress extends Game {
 	SpriteBatch batch;
 	Texture img;
 	Muffin muffin;

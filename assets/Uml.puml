@@ -1,0 +1,112 @@
+@startuml
+enum WeaponType {
+ SABRE
+ MACE
+}
+abstract class Weapon {
+ damage:int
+ attacks:int
+
+ run():void
+}
+class Mace
+class Sabre
+
+Mace --|> Weapon
+Sabre -|> Weapon
+
+Weapon *- WeaponType
+
+class LevelController{
+ WORLD_WIDTH:10
+ WORLD_HEIGHT:15*20
+ WORLD_STATE_RUNNING:0
+ WORLD_STATE_NEXT_LEVEL:1
+ WORLD_STATE_GAME_OVER:2
+
+ gravity:Vector2(0, -12)
+
+ weaponProbability:float
+ platformCount:int
+ dynamicPlatforms:int
+
+ rand:Random
+ heightSoFar:float
+ score:int
+ state:int
+
+ muffin:Muffin
+ platforms:Platform[]
+ weapons:Weapon[]
+ keys:Key[]
+ oven:Oven
+
+ generateLevel():void
+}
+class Platform
+class Key
+
+class Muffin {
+ liveScore:int
+ points:int
+ weapon:Weapon
+
+ getWeapon():bool
+ runAttack():void
+ damage():void
+ jump():void
+ move(Direction):void
+}
+
+class Oven
+
+class GameObject {
+ skin:TextureRegion
+
+ update(deltaTime:float):void
+ render(batch):void
+}
+
+class DynamicObject {
+ velocity:Vector2
+ aceleration:Vector2
+}
+
+Platform --|> DynamicObject
+Muffin -|> DynamicObject
+
+DynamicObject --|> GameObject
+GameObject <|-- Oven
+Weapon --|> GameObject
+Key --|> GameObject
+
+LevelController -* Key
+LevelController *-- Platform
+LevelController *- Oven
+
+LevelController -* Muffin
+Weapon --* LevelController
+Weapon --* Muffin
+
+class WorldController
+class WorldRenderer
+
+class Assets
+class Animation
+class Constants
+
+class Game
+class GameScreen
+class MenuScreen
+
+GameObject *-- Assets
+Constants -* Assets
+Assets <.. Animation
+
+LevelController --* GameScreen
+GameScreen <-- WorldController
+GameScreen <-- WorldRenderer
+
+MenuScreen .> Game
+GameScreen .> MenuScreen
+@enduml
