@@ -12,8 +12,6 @@ import com.badlogic.gdx.utils.Disposable;
 public class Assets implements Disposable, AssetErrorListener {
     public static final String TAG = Assets.class.getName();
 
-    public static final Assets instance = new Assets();
-
     private AssetManager assetManager;
 
     // Media de los objetos
@@ -24,11 +22,14 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetWeapon assetSabre;
     public AssetWeapon assetMace;
 
-    private Assets(){}
-
-    public void init(AssetManager assetManager){
+    public Assets(AssetManager assetManager){
         this.assetManager = assetManager;
         assetManager.setErrorListener(this);
+
+        init();
+    }
+
+    public void init(){
         assetManager.load(Constants.ATLAS, TextureAtlas.class);
         assetManager.load(Constants.MACE, TextureAtlas.class);
         assetManager.load(Constants.SABRE, TextureAtlas.class);
@@ -86,13 +87,13 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public static class AssetMace extends AssetWeapon{
         public AssetMace(TextureAtlas atlas) {
-            super(atlas, 23, "mace");
+            super(atlas, 5, "mace");
         }
     }
 
     public static class AssetSabre extends AssetWeapon{
         public AssetSabre(TextureAtlas atlas) {
-            super(atlas, 23, "sabre");
+            super(atlas, 5, "sabre");
         }
     }
 

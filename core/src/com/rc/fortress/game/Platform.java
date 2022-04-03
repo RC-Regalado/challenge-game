@@ -1,6 +1,7 @@
 package com.rc.fortress.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rc.fortress.Fortress;
 import com.rc.fortress.utils.Assets;
 
 public class Platform extends DynamicObject {
@@ -19,7 +20,7 @@ public class Platform extends DynamicObject {
     public Platform(int type, float x, float y) {
         super(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT);
 
-        skin = Assets.instance.assetPlatform;
+        skin = Fortress.assets.assetPlatform;
 //        this.
     }
 
@@ -38,5 +39,14 @@ public class Platform extends DynamicObject {
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(skin.platform, position.x, position.y, bounds.width, bounds.height);
+    }
+
+    public boolean pulverized(){
+        //platform.state == Platform.PLATFORM_STATE_PULVERIZING && platform.stateTime > Platform.PLATFORM_PULVERIZE_TIME
+        return false;
+    }
+
+    public void pulverize(){
+
     }
 }

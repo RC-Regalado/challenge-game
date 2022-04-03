@@ -15,9 +15,6 @@ public class LevelController {
 
     public static final float WORLD_WIDTH = 10;
     public static final float WORLD_HEIGHT = 15 * 20;
-    public static final int WORLD_STATE_RUNNING = 0;
-    public static final int WORLD_STATE_NEXT_LEVEL = 1;
-    public static final int WORLD_STATE_GAME_OVER = 2;
 
     public static final Vector2 gravity = new Vector2(0, -12);
 
@@ -26,9 +23,6 @@ public class LevelController {
     private int dynamicPlatforms;
 
     public final Random rand;
-    public float heightSoFar;
-    public int score;
-    public int state;
 
     public final Muffin muffin;
     public final List<Platform> platforms;
@@ -44,10 +38,6 @@ public class LevelController {
 
         rand = new Random();
         generateLevel();
-
-        this.heightSoFar = 0;
-        this.score = 0;
-        this.state = WORLD_STATE_RUNNING;
     }
 
     private void generateLevel () {
