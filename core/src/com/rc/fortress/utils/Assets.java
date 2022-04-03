@@ -20,21 +20,32 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetMuffin assetMuffin;
     public AssetPlatform assetPlatform;
 
+    // Armas
+    public AssetWeapon assetSabre;
+    public AssetWeapon assetMace;
+
     private Assets(){}
 
     public void init(AssetManager assetManager){
         this.assetManager = assetManager;
         assetManager.setErrorListener(this);
         assetManager.load(Constants.ATLAS, TextureAtlas.class);
+        assetManager.load(Constants.MACE, TextureAtlas.class);
+        assetManager.load(Constants.SABRE, TextureAtlas.class);
         assetManager.finishLoading();
 
         TextureAtlas atlas = assetManager.get(Constants.ATLAS);
+        TextureAtlas mace = assetManager.get(Constants.MACE);
+        TextureAtlas sabre = assetManager.get(Constants.SABRE);
 
-        for (Texture t : atlas.getTextures())
-            t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+//        for (Texture t : atlas.getTextures())
+//            t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         assetMuffin = new AssetMuffin(atlas);
         assetPlatform = new AssetPlatform(atlas);
+
+        assetMace = new AssetMace(mace);
+        assetSabre = new AssetSabre(sabre);
     }
 
     public static class AssetMuffin {
@@ -57,6 +68,31 @@ public class Assets implements Disposable, AssetErrorListener {
 
         public AssetPlatform(TextureAtlas atlas){
             platform = new TextureRegion(atlas.findRegion("platform"));
+        }
+    }
+
+    public static abstract class AssetWeapon {
+        public final Animation attack;
+
+        public AssetWeapon(TextureAtlas atlas, int steps, String name){
+            TextureRegion[] tmp = new TextureRegion[steps];
+
+            for (int i = 0; i < steps; i++)
+                tmp[i] = atlas.findRegion(name + '-' + (i+1));
+
+            attack = new Animation(0.18f, tmp);
+        }
+    }
+
+    public static class AssetMace extends AssetWeapon{
+        public AssetMace(TextureAtlas atlas) {
+            super(atlas, 23, "mace");
+        }
+    }
+
+    public static class AssetSabre extends AssetWeapon{
+        public AssetSabre(TextureAtlas atlas) {
+            super(atlas, 23, "sabre");
         }
     }
 

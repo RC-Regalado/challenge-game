@@ -6,8 +6,8 @@ import com.rc.fortress.utils.Assets;
 public class Platform extends DynamicObject {
     private final Assets.AssetPlatform skin;
 
-    public static final float PLATFORM_WIDTH = 2;
-    public static final float PLATFORM_HEIGHT = 0.5f;
+    public static final float PLATFORM_WIDTH = 200;
+    public static final float PLATFORM_HEIGHT = 50;
     public static final int PLATFORM_TYPE_STATIC = 0;
     public static final int PLATFORM_TYPE_MOVING = 1;
     public static final int PLATFORM_STATE_NORMAL = 0;

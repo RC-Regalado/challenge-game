@@ -9,8 +9,8 @@ public abstract class Weapon extends GameObject {
         SABRE
     }
 
-    public static float WEAPON_WIDTH = 0.3f;
-    public static float WEAPON_HEIGHT = 0.3f;
+    public static float WEAPON_WIDTH = 90f;
+    public static float WEAPON_HEIGHT = 90f;
     protected final WeaponTypes type;
 
     public Weapon(WeaponTypes type, float x, float y) {
