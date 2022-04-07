@@ -35,9 +35,22 @@ public class Muffin extends DynamicObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        TextureRegion region = skin.walking.getKeyFrame(stateTime, Animation.ANIMATION_LOOPING);
+        TextureRegion keyFrame;
+        switch (state) {
+            case FALL:
+                keyFrame = skin.walking.getKeyFrame(stateTime, Animation.ANIMATION_LOOPING);
+                break;
+            case JUMP:
+            default:
+                keyFrame = skin.jumping;
+                break;
+        }
 
-        batch.draw(region, position.x, position.y, bounds.width, bounds.height);
+        float side = velocity.x < 0 ? -1 : 1;
+        if (side < 0)
+            batch.draw(keyFrame, position.x + 0.5f, position.y - 0.5f, side * 1, 1);
+        else
+            batch.draw(keyFrame, position.x - 0.5f, position.y - 0.5f, side * 1, 1);
     }
 
     public void hitPlatform () {
