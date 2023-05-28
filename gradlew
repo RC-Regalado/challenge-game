@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Prueba de modificacion
 #
 # Copyright © 2015-2021 the original authors.
 #
@@ -205,6 +204,12 @@ set -- \
         -classpath "$CLASSPATH" \
         org.gradle.wrapper.GradleWrapperMain \
         "$@"
+
+# Stop when "xargs" is not available.
+if ! command -v xargs >/dev/null 2>&1
+then
+    die "xargs is not available"
+fi
 
 # Use "xargs" to parse quoted args.
 #
