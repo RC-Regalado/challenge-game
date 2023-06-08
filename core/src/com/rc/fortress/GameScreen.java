@@ -2,8 +2,6 @@ package com.rc.fortress;
 
 import java.util.Iterator;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -12,7 +10,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -54,7 +51,6 @@ public class GameScreen implements Screen {
 		lastDropTime = TimeUtils.nanoTime();
 	}
 
-	
 	public GameScreen(final Fortress game) {
 		this.game = game;
 		dropsGathered = 0;
@@ -115,8 +111,8 @@ public class GameScreen implements Screen {
 		if (TimeUtils.nanoTime() - lastDropTime > 1000000000)
 			spawnRaindrop();
 
-		Iterator<Rectangle> iter = raindrops.iterator(); 
-		while (iter.hasNext()){
+		Iterator<Rectangle> iter = raindrops.iterator();
+		while (iter.hasNext()) {
 			Rectangle raindrop = iter.next();
 
 			raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
@@ -151,7 +147,6 @@ public class GameScreen implements Screen {
 	@Override
 	public void resume() {
 	}
-
 
 	@Override
 	public void dispose() {
