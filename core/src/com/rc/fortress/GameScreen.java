@@ -16,6 +16,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.rc.fortress.game.WorldController;
+import com.rc.fortress.game.WorldRenderer;
 
 public class GameScreen implements Screen {
 	final Fortress game;
@@ -32,6 +34,9 @@ public class GameScreen implements Screen {
 
 	private Array<Rectangle> raindrops;
 	private long lastDropTime;
+
+	private WorldController worldController;
+	private WorldRenderer worldRenderer;
 
 	int dropsGathered;
 
@@ -54,6 +59,9 @@ public class GameScreen implements Screen {
 	public GameScreen(final Fortress game) {
 		this.game = game;
 		dropsGathered = 0;
+
+		worldController = new WorldController();
+		worldRenderer = new WorldRenderer(worldController);
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
@@ -79,7 +87,11 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		worldController.update(delta);
+
 		ScreenUtils.clear(0, 0, 0.2f, 1);
+
+		worldRenderer.render();
 
 		camera.update();
 
@@ -128,6 +140,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
+		worldRenderer.resize(width, height);
 	}
 
 	@Override
@@ -155,5 +168,6 @@ public class GameScreen implements Screen {
 
 		dropSound.dispose();
 		lofiMusic.dispose();
+		worldRenderer.dispose();
 	}
 }
