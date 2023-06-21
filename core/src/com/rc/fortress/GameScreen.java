@@ -5,6 +5,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
@@ -18,11 +19,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.rc.fortress.game.WorldController;
 import com.rc.fortress.game.WorldRenderer;
+import com.rc.fortress.game.objects.Platform;
+import com.rc.fortress.utils.Assets;
 
 public class GameScreen implements Screen {
 	final Fortress game;
 
 	private OrthographicCamera camera;
+
+	private Platform platform;
 
 	private Texture dropImg;
 	private Texture bucketImg;
@@ -57,6 +62,8 @@ public class GameScreen implements Screen {
 	}
 
 	public GameScreen(final Fortress game) {
+		Assets.assets.init(new AssetManager());
+
 		this.game = game;
 		dropsGathered = 0;
 
@@ -76,11 +83,13 @@ public class GameScreen implements Screen {
 		dropImg = new Texture(read("drop.png"));
 		bucketImg = new Texture(read("bucket.png"));
 
-		dropSound = Gdx.audio.newSound(read("drop.wav"));
-		lofiMusic = Gdx.audio.newMusic(read("lofi.mp3"));
+		dropSound = Assets.assets.sounds.dropSound;
+		lofiMusic = Assets.assets.music.lofiMusic;
 
 		lofiMusic.setLooping(true);
 
+		platform = new Platform();
+		platform.position.set(10, 10);
 		raindrops = new Array<Rectangle>();
 		spawnRaindrop();
 	}
@@ -97,28 +106,11 @@ public class GameScreen implements Screen {
 
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
-		game.batch.draw(bucketImg, bucket.x, bucket.y);
+		platform.render(game.batch);
 		for (Rectangle raindrop : raindrops) {
 			game.batch.draw(dropImg, raindrop.x, raindrop.y);
 		}
 		game.batch.end();
-
-		if (Gdx.input.isTouched()) {
-			Vector3 touchPos = new Vector3();
-			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-			camera.unproject(touchPos);
-			bucket.x = touchPos.x - 64 / 2;
-		}
-
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-			bucket.x -= 200 * Gdx.graphics.getDeltaTime();
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-			bucket.x += 200 * Gdx.graphics.getDeltaTime();
-
-		if (bucket.x < 0)
-			bucket.x = 0;
-		if (bucket.x > 800 - 64)
-			bucket.x = 800 - 64;
 
 		if (TimeUtils.nanoTime() - lastDropTime > 1000000000)
 			spawnRaindrop();
@@ -136,6 +128,8 @@ public class GameScreen implements Screen {
 				iter.remove();
 			}
 		}
+
+		platform.update(delta);
 	}
 
 	@Override
