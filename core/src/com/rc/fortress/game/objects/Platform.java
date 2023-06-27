@@ -2,21 +2,17 @@ package com.rc.fortress.game.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.rc.fortress.utils.Assets;
+import com.badlogic.gdx.utils.Pool.Poolable;
 
-public class Platform extends AbstractGameObject {
-	private TextureRegion platform;
+public class Platform extends AbstractGameObject implements Poolable {
 
 	public Platform() {
 		init();
 	}
 
 	private void init() {
-		dimension.set(500, 50);
-		platform = Assets.assets.platform.platform;
+		dimension.setSize(500, 50);
 	}
 
 	@Override
@@ -34,21 +30,13 @@ public class Platform extends AbstractGameObject {
 
 		if (position.x < 0)
 			position.x = 0;
-		if (position.x > 800 - 64)
-			position.x = 800 - 64;
-
+		if (position.x > 800 - dimension.width)
+			position.x = 800 - dimension.width;
 	}
 
+
 	@Override
-	public void render(SpriteBatch batch) {
-		batch.draw(platform.getTexture(),
-				position.x , position.y ,
-				origin.x, origin.y,
-				dimension.x / 4, dimension.y,
-				scale.x, scale.y,
-				rotation,
-				platform.getRegionX(), platform.getRegionY(),
-				platform.getRegionWidth(), platform.getRegionHeight(),
-				false, false);
+	public void reset() {
+		init();
 	}
 }

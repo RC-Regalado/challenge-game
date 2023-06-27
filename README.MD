@@ -13,3 +13,12 @@ Esto es gracias a que alguien escucha cada vez que un nuevo plan surge y me da e
 > La mayoria de los assets provienen de [OpenGameArt](https://opengameart.org/)
 
 De paso tambien estudio como funciona la mayoría de comandos de Git e integración continua.
+
+## Datos
+
+Originalmente el protagonista de la historia debía ser un muffin
+
+¿El problema? No en realidad no había problema, excepto que no se animar y pues no es muy fácil encontrar un muffin. 
+Vale, aunque quiero mantener un poco el concepto y recolectar algunos a lo largo del juego.
+
+Si, si. Quería hacer algo con LibGDX no sabía precisamente qué, creo que por eso el repositorio no tiene nombre jaja

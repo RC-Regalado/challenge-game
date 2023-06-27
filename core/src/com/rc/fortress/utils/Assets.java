@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.utils.Disposable;
@@ -21,6 +22,8 @@ public class Assets implements Disposable, AssetErrorListener {
 	public AssetMuffin muffin;
 	public AssetPlatform platform;
 
+	public Texture background;
+
 	private Assets() {
 	}
 
@@ -29,12 +32,15 @@ public class Assets implements Disposable, AssetErrorListener {
 
 		assetManager.setErrorListener(this);
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+		assetManager.load(Constants.TEXTURE_BACKGROUND_OBJECTS, Texture.class);
 
 		assetManager.load("lofi.mp3", Music.class);
 		assetManager.load("drop.wav", Sound.class);
 		assetManager.finishLoading();
 
 		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
+
+		background = assetManager.get(Constants.TEXTURE_BACKGROUND_OBJECTS);
 
 		muffin = new AssetMuffin(atlas);
 		platform = new AssetPlatform(atlas);
