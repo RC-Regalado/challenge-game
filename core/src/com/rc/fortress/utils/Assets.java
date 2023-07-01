@@ -8,8 +8,10 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.utils.Disposable;
+import com.rc.fortress.game.Animation;
 
 public class Assets implements Disposable, AssetErrorListener {
 	private static final String TAG = Assets.class.getName();
@@ -50,15 +52,24 @@ public class Assets implements Disposable, AssetErrorListener {
 	}
 
 	public class AssetMuffin {
-		public final AtlasRegion bread;
+		public final Animation bread;
 
 		public AssetMuffin (TextureAtlas atlas){
-			bread = atlas.findRegion("muffin-1");
+			bread = new Animation(0.15f, 6);
+
+			bread
+				.addFrame(atlas.findRegion("muffin-1"))
+				.addFrame(atlas.findRegion("muffin-2"))
+				.addFrame(atlas.findRegion("muffin-3"))
+				.addFrame(atlas.findRegion("muffin-4"))
+				.addFrame(atlas.findRegion("muffin-5"))
+				.addFrame(atlas.findRegion("muffin-6"))
+				;
 		}
 	}
 
 	public class AssetPlatform {
-		public final AtlasRegion platform;
+		public final TextureRegion platform;
 
 		public AssetPlatform(TextureAtlas atlas) {
 			platform = atlas.findRegion("platform");

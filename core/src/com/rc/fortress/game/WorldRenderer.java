@@ -1,5 +1,6 @@
 package com.rc.fortress.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -24,6 +25,7 @@ public class WorldRenderer implements Disposable {
 	private TextureRegion platformImg;
 
 	private Array<Rectangle> raindrops;
+	private float state;
 
 	public WorldRenderer(WorldController worldController, final Fortress game) {
 		this.game = game;
@@ -42,6 +44,7 @@ public class WorldRenderer implements Disposable {
 		spawnRaindrop();
 
 		platformImg = Assets.assets.platform.platform;
+		state = 0;
 	}
 
 	private void spawnRaindrop() {
@@ -57,16 +60,14 @@ public class WorldRenderer implements Disposable {
 
 	public void renderPlatform(SpriteBatch batch) {
 		for (Platform platform : controller.activePlatforms) {
-			batch.draw(platformImg.getTexture(),
+			batch.draw(platformImg,
 					platform.position.x, platform.position.y,
-					platform.origin.x, platform.origin.y,
-					platform.dimension.width, platform.dimension.height,
-					platform.scale.x, platform.scale.y,
-					platform.rotation,
-					platformImg.getRegionX(), platformImg.getRegionY(),
-					platformImg.getRegionWidth(), platformImg.getRegionHeight(),
-					false, false);
+					platform.dimension.width, platform.dimension.height);
 		}
+	}
+
+	public void renderMuffin(SpriteBatch batch) {
+		batch.draw(Assets.assets.muffin.bread.getKeyFrame(state, 0), 0, 0);
 	}
 
 	public void render() {
@@ -80,7 +81,10 @@ public class WorldRenderer implements Disposable {
 		batch.enableBlending();
 
 		renderPlatform(batch);
+		renderMuffin(batch);
 		batch.end();
+
+		state += Gdx.graphics.getDeltaTime();
 	}
 
 	public void resize(int width, int height) {
