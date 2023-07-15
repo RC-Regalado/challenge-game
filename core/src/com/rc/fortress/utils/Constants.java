@@ -5,6 +5,5 @@ public class Constants {
 	public final static int VIEWPORT_HEIGHT = 480;
 
 	public final static String TEXTURE_ATLAS_OBJECTS = "assets.atlas";
-	public final static String TEXTURE_ATLAS_GUI = "pack.atlas";
 	public final static String TEXTURE_BACKGROUND_OBJECTS = "background.jpg";
 }

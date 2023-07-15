@@ -5,21 +5,23 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
+import com.rc.controls.UI;
+import com.rc.controls.UIController;
 import com.rc.fortress.game.objects.Platform;
 import com.rc.fortress.utils.Assets;
 
 public class WorldController extends InputAdapter implements Disposable {
 	private static final String TAG = WorldController.class.getName();
 
-	private Sound dropSound;
 	private Music lofiMusic;
 
 	public Array<Platform> activePlatforms;
 	private final Pool<Platform> platformPool;
+
+	public UIController uiController;
 
 	public WorldController() {
 		platformPool = new Pool<Platform>() {
@@ -29,14 +31,16 @@ public class WorldController extends InputAdapter implements Disposable {
 			}
 		};
 
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(this);
+		Gdx.input.setInputProcessor(multiplexer);
+
 		init();
 	}
 
 	private void init () {
-		InputMultiplexer multiplexer = new InputMultiplexer();
-		multiplexer.addProcessor(this);
-		Gdx.input.setInputProcessor(multiplexer);
-		dropSound = Assets.assets.sounds.dropSound;
+		uiController = new UIController();
+
 		lofiMusic = Assets.assets.music.lofiMusic;
 
 		lofiMusic.setLooping(true);
@@ -49,10 +53,13 @@ public class WorldController extends InputAdapter implements Disposable {
 	}
 
 	public void update (float deltaTime) {
+		uiController.update(deltaTime);
+
 		for(Platform platform : activePlatforms) {
 			platform.update(deltaTime);
 		}
 	}
+
 
 	@Override
 	public boolean keyUp(int keycode) {
@@ -65,9 +72,6 @@ public class WorldController extends InputAdapter implements Disposable {
 	}
 	@Override
 	public void dispose() {
-
-
-		dropSound.dispose();
 		lofiMusic.dispose();
 	}
 }

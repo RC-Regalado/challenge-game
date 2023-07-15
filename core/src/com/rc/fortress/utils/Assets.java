@@ -22,8 +22,6 @@ public class Assets implements Disposable, AssetErrorListener {
 	public AssetsSound sounds;
 	public AssetMuffin muffin;
 
-	public UISkinAsset uiSkin;
-
 	public AssetPlatform platform;
 
 	public Texture background;
@@ -36,7 +34,6 @@ public class Assets implements Disposable, AssetErrorListener {
 
 		assetManager.setErrorListener(this);
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
-		assetManager.load(Constants.TEXTURE_ATLAS_GUI, TextureAtlas.class);
 		assetManager.load(Constants.TEXTURE_BACKGROUND_OBJECTS, Texture.class);
 
 		assetManager.load("lofi.mp3", Music.class);
@@ -44,26 +41,13 @@ public class Assets implements Disposable, AssetErrorListener {
 		assetManager.finishLoading();
 
 		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
-		TextureAtlas ui = assetManager.get(Constants.TEXTURE_ATLAS_GUI);
 		background = assetManager.get(Constants.TEXTURE_BACKGROUND_OBJECTS);
 
 		muffin = new AssetMuffin(atlas);
 		platform = new AssetPlatform(atlas);
 
-		uiSkin = new UISkinAsset(ui);
-
 		music = new AssetsMusic(assetManager);
 		sounds = new AssetsSound(assetManager);
-	}
-
-	public class UISkinAsset {
-		public final TextureRegion border;
-		public final TextureRegion guide;
-
-		public UISkinAsset (TextureAtlas atlas) {
-			border = atlas.findRegion("directional-border");
-			guide = atlas.findRegion("directional-guide");
-		}
 	}
 
 	public class AssetMuffin {

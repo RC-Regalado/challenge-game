@@ -1,4 +1,4 @@
-package com.rc.fortress.game.render;
+package com.rc.fortress.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,8 +8,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.rc.controls.UI;
+import com.rc.controls.render.UIRenderer;
 import com.rc.fortress.Fortress;
-import com.rc.fortress.game.WorldController;
 import com.rc.fortress.game.objects.Platform;
 import com.rc.fortress.utils.Assets;
 import com.rc.fortress.utils.Constants;
@@ -21,16 +22,17 @@ public class WorldRenderer implements Disposable {
 	private SpriteBatch batch;
 	private WorldController controller;
 
-	private UIRenderer uiRenderer;
-
 	private TextureRegion platformImg;
 
 	private Array<Rectangle> raindrops;
 	private float state;
 
+	private UIRenderer uiRenderer;
+
 	public WorldRenderer(WorldController worldController, final Fortress game) {
 		this.game = game;
 		this.controller = worldController;
+		this.uiRenderer = new UIRenderer(worldController.uiController);
 		init();
 	}
 
@@ -42,8 +44,6 @@ public class WorldRenderer implements Disposable {
 
 		camera.update();
 
-		uiRenderer = new UIRenderer();
-		
 		raindrops = new Array<Rectangle>();
 		spawnRaindrop();
 
@@ -77,9 +77,9 @@ public class WorldRenderer implements Disposable {
 	public void render() {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
+
 		batch.disableBlending();
-		batch.draw(Assets.assets.background, 
+		batch.draw(Assets.assets.background,
 				0, 0,
 				Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
 		batch.enableBlending();
@@ -88,6 +88,7 @@ public class WorldRenderer implements Disposable {
 		renderMuffin(batch);
 
 		uiRenderer.render(batch);
+
 		batch.end();
 
 		state += Gdx.graphics.getDeltaTime();

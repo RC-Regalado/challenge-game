@@ -4,7 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.rc.fortress.game.WorldController;
-import com.rc.fortress.game.render.WorldRenderer;
+import com.rc.fortress.game.WorldRenderer;
 import com.rc.fortress.utils.Assets;
 
 public class GameScreen implements Screen {

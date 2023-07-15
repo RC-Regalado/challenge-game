@@ -73,6 +73,15 @@ project(":core") {
 
 
     dependencies {
+        implementation project(":controls")
+    }
+}
+
+project(":controls") {
+    apply plugin: "java-library"
+
+
+    dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         
     }

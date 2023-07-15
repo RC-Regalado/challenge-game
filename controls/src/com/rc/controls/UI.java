@@ -1,9 +1,10 @@
-package com.rc.fortress.game.objects;
+package com.rc.controls;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.rc.controls.objects.AbstractControlObject;
 
-public class UI extends AbstractGameObject {
+public class UI extends AbstractControlObject {
 
 	public Rectangle cursor;
 
@@ -15,8 +16,7 @@ public class UI extends AbstractGameObject {
 		position.set(10, 10);
 		dimension.setSize(100, 100);
 
-		cursor = new Rectangle(dimension.width / 2 , dimension.height / 2
-				, 20, 20);
+		cursor = new Rectangle(dimension.width / 2 , dimension.height / 2, 20, 20);
 		Gdx.app.debug("OBJECT", "X: " + cursor.x + "Y: " + cursor.y);
 	}
 
