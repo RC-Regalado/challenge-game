@@ -1,4 +1,4 @@
-package com.rc.fortress.game;
+package com.rc.fortress.game.render;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,9 +8,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.utils.SortedIntList.Iterator;
 import com.rc.fortress.Fortress;
+import com.rc.fortress.game.WorldController;
 import com.rc.fortress.game.objects.Platform;
 import com.rc.fortress.utils.Assets;
 import com.rc.fortress.utils.Constants;
@@ -21,6 +20,8 @@ public class WorldRenderer implements Disposable {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private WorldController controller;
+
+	private UIRenderer uiRenderer;
 
 	private TextureRegion platformImg;
 
@@ -40,6 +41,9 @@ public class WorldRenderer implements Disposable {
 		camera.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
 
 		camera.update();
+
+		uiRenderer = new UIRenderer();
+		
 		raindrops = new Array<Rectangle>();
 		spawnRaindrop();
 
@@ -82,6 +86,8 @@ public class WorldRenderer implements Disposable {
 
 		renderPlatform(batch);
 		renderMuffin(batch);
+
+		uiRenderer.render(batch);
 		batch.end();
 
 		state += Gdx.graphics.getDeltaTime();

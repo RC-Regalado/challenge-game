@@ -12,7 +12,7 @@ public class Fortress extends Game {
 
 	@Override
 	public void create() {
-		Gdx.app.setLogLevel(Application.LOG_ERROR);
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 

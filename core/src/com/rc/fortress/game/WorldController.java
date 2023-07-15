@@ -1,13 +1,11 @@
 package com.rc.fortress.game;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Pool;
@@ -35,7 +33,9 @@ public class WorldController extends InputAdapter implements Disposable {
 	}
 
 	private void init () {
-		Gdx.input.setInputProcessor(this);
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(this);
+		Gdx.input.setInputProcessor(multiplexer);
 		dropSound = Assets.assets.sounds.dropSound;
 		lofiMusic = Assets.assets.music.lofiMusic;
 

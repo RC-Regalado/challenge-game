@@ -1,0 +1,20 @@
+
+pack.png
+size: 256, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+directional-border
+  rotate: false
+  xy: 2, 2
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+directional-guide
+  rotate: false
+  xy: 110, 85
+  size: 23, 23
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
